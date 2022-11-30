@@ -79,6 +79,15 @@ export class MenuItemsService {
   */
 
   async getMenuItems() {
-    throw new Error('TODO in task 3');
+    return await this.app.getDataSource().menuItem.findMany({
+      include: {
+        children: {
+            include: {
+              children: true 
+            }
+        },
+      }
+
+    });
   }
 }
