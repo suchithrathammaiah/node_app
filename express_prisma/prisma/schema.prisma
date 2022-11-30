@@ -27,6 +27,7 @@ model MenuItem {
   createdAt DateTime @default(dbgenerated("CURRENT_TIMESTAMP"))
   children      MenuItem[]  @relation("antecedant_children")
   parent        MenuItem?   @relation("antecedant_children", fields: [parentId], references: [id])
+  
   @@map("menu_items")
 }
 

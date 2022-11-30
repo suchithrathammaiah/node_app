@@ -10,13 +10,22 @@ export class EventsService {
   async getEventsWithWorkshops() {
     return await this.app.getDataSource().event.findMany({
         include: {
-            workshops: true
+          workshops: true
         }
     });
   }
 
   async getFutureEventWithWorkshops() {
     return await this.app.getDataSource().event.findMany({
+      where: {
+        workshops: {
+          every: {
+            start: {
+              gte: new Date()
+            }
+          }
+        }
+      },
       include: {
         workshops: {
           where: {
